@@ -1,0 +1,38 @@
+# 版本控制
+.git
+.gitignore
+
+# 构建产物
+.next
+out
+node_modules
+
+# 日志
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 环境变量
+.env*
+!.env.example
+
+# 证书目录（会通过卷挂载）
+certificates
+
+# 公共目录（会通过卷挂载）
+public
+
+# 开发相关
+.vscode
+.idea
+*.swp
+*.swo
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# Docker文件
+docker-compose.yml
+.dockerignore
+README.docker.md 
