@@ -10,13 +10,10 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 # 复制package.json和pnpm-lock.yaml（如果存在）
 COPY package.json pnpm-lock.yaml* ./
 
-# 设置pnpm配置
-RUN pnpm config set store-dir /root/.pnpm-store
-
 # 安装依赖并更新lock文件
 RUN pnpm install
 
-# 复制所有源代码（除了将被挂载的目录）
+# 复制所有源代码
 COPY . .
 
 # 确保静态目录存在
@@ -43,8 +40,7 @@ ENV PORT=3000
 COPY --from=builder /app/package.json /app/pnpm-lock.yaml ./
 
 # 安装仅生产环境需要的依赖
-RUN pnpm config set store-dir /root/.pnpm-store && \
-    pnpm install --prod
+RUN pnpm install --prod
 
 # 从构建阶段复制构建后的文件
 COPY --from=builder /app/.next ./.next

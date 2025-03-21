@@ -1,18 +1,17 @@
 services:
     html-preview-online:
-        image: html-preview-online:latest
+        image: ghcr.io/jwygithub/html-preview-online
         ports:
             - '9300:3000'
         volumes:
             - ./public:/app/public:cached
-            - pnpm-store:/root/.pnpm-store
         restart: unless-stopped
         environment:
             - NODE_ENV=production
             - PORT=3000
-            - BASE_PATH=preview
+            - NEXT_PUBLIC_BASE_PATH=preview
         healthcheck:
-            test: ['CMD', 'wget', '--spider', 'http://localhost:3000/preview']
+            test: ['CMD', 'wget', '--spider', 'http://localhost:3000/preview/api/preview-page']
             interval: 30s
             timeout: 10s
             retries: 3
