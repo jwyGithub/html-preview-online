@@ -48,11 +48,12 @@ export async function POST(request: Request) {
         // 写入HTML内容到template.html
         await writeFile(templatePath, htmlContent, 'utf-8');
 
-        // 生成预览URL
-        const basePath = process.env.NEXT_PUBLIC_BASE_PATH || 'preview'; // 固定使用与next.config.ts中一致的basePath
-        const previewUrl = `${basePath}/template.html`;
+        const basePath = process.env.NEXT_PUBLIC_BASE_PATH || 'preview';
 
-        // 返回预览URL，添加CORS头
+        // 生成预览URL
+        const previewUrl = `/${basePath}/api/preview-page`;
+
+        // 返回预览URL
         return new NextResponse(JSON.stringify({ url: previewUrl }), {
             status: 200,
             headers: {
