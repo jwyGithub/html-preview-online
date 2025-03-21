@@ -13,7 +13,6 @@
     "dependencies": {
         "@radix-ui/react-dialog": "^1.1.6",
         "@radix-ui/react-slot": "^1.1.2",
-        "@types/uuid": "^10.0.0",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "html2canvas": "^1.4.1",
@@ -24,8 +23,7 @@
         "sonner": "^2.0.1",
         "tailwind-merge": "^3.0.2",
         "tailwindcss-animate": "^1.0.7",
-        "tw-animate-css": "^1.2.4",
-        "uuid": "^11.1.0"
+        "tw-animate-css": "^1.2.4"
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3",
@@ -39,3 +37,4 @@
         "typescript": "^5"
     }
 }
+

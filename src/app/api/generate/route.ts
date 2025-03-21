@@ -49,7 +49,7 @@ export async function POST(request: Request) {
         await writeFile(templatePath, htmlContent, 'utf-8');
 
         // 生成预览URL
-        const basePath = process.env.BASE_PATH || '/preview'; // 固定使用与next.config.ts中一致的basePath
+        const basePath = process.env.NEXT_PUBLIC_BASE_PATH || 'preview'; // 固定使用与next.config.ts中一致的basePath
         const previewUrl = `${basePath}/template.html`;
 
         // 返回预览URL，添加CORS头

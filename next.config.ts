@@ -1,11 +1,11 @@
 import type { NextConfig } from 'next';
 
-const basePath = process.env.BASE_PATH || '/preview';
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || 'preview';
 
 const nextConfig: NextConfig = {
     /* config options here */
     // 设置基础路径前缀
-    basePath,
+    basePath: `/${basePath}`,
 
     // 允许开发环境中的跨域请求
     experimental: {

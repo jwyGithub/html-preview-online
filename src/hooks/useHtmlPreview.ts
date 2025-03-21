@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || 'preview';
+
 export function useHtmlPreview() {
     const [htmlContent, setHtmlContent] = useState('');
     const [previewUrl, setPreviewUrl] = useState('');
@@ -13,7 +15,7 @@ export function useHtmlPreview() {
             setIsLoading(true);
             setError(null);
 
-            const response = await fetch('/preview/api/generate', {
+            const response = await fetch(`/${BASE_PATH}/api/generate`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
