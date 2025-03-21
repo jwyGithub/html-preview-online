@@ -13,8 +13,8 @@ COPY package.json pnpm-lock.yaml* ./
 # 设置pnpm配置
 RUN pnpm config set store-dir /root/.pnpm-store
 
-# 安装依赖
-RUN pnpm install --frozen-lockfile
+# 安装依赖并更新lock文件
+RUN pnpm install
 
 # 复制所有源代码（除了将被挂载的目录）
 COPY . .
@@ -36,15 +36,15 @@ WORKDIR /app
 
 # 设置环境变量
 ENV NODE_ENV=production
-ENV BASE_PATH=preview
+ENV NEXT_PUBLIC_BASE_PATH=preview
 ENV PORT=3000
 
 # 复制package.json和pnpm-lock.yaml
-COPY package.json pnpm-lock.yaml* ./
+COPY --from=builder /app/package.json /app/pnpm-lock.yaml ./
 
 # 安装仅生产环境需要的依赖
 RUN pnpm config set store-dir /root/.pnpm-store && \
-    pnpm install --prod --frozen-lockfile
+    pnpm install --prod
 
 # 从构建阶段复制构建后的文件
 COPY --from=builder /app/.next ./.next
