@@ -15,12 +15,14 @@ export async function GET() {
         // 读取模板文件
         const content = await readFile(templatePath, 'utf-8');
 
-        // 返回HTML内容
+        // 返回HTML内容，添加适当的标头以确保正确渲染
         return new NextResponse(content, {
             status: 200,
             headers: {
-                'Content-Type': 'text/html',
-                'Cache-Control': 'no-store'
+                'Content-Type': 'text/html; charset=utf-8',
+                'Cache-Control': 'no-store, no-cache, must-revalidate',
+                'X-Content-Type-Options': 'nosniff',
+                'X-Frame-Options': 'SAMEORIGIN'
             }
         });
     } catch (error) {

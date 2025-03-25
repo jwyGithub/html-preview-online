@@ -1,69 +1,169 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Preview</title>
+    <title>美国留学机构推荐</title>
     <style>
-        /* 简化样式，专注于内容展示 */
         body {
-            margin: 0;
-            padding: 0;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
         }
-        /* 确保图片等内容不溢出 */
-        img, video, canvas, svg {
-            max-width: 100%;
-            height: auto;
+        h1 {
+            color: #1a5276;
+            text-align: center;
+            margin-bottom: 10px;
         }
-    </style>
-</head>
-<body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Preview</title>
-    <style>
-        /* 确保内容完全显示 */
-        html, body {
-            margin: 0;
-            padding: 0;
+        h2 {
+            color: #2874a6;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-weight: normal;
+        }
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+        table {
             width: 100%;
-            height: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background: white;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #e3f2fd;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        .footer {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        .note {
+            background-color: #fffde7;
+            padding: 15px;
+            border-left: 4px solid #ffd600;
+            margin: 20px 0;
         }
     </style>
 </head>
 <body>
-    <div style="background-color: #F8F9FA; padding: 20px; border-radius: 10px; font-family: Arial, sans-serif; width: 300px; height: 400px; display: flex; flex-direction: column; justify-content: space-between;">
-    <h1 style="color: #333; text-align: center; font-size: 18px; margin: 0;">艺术生留学作品集机构对比</h1>
-    <div style="text-align: center;">
-        <div style="background-color: #E9EDC9; padding: 10px; border-radius: 10px; margin-bottom: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-            <h2 style="color: #333; font-size: 16px; margin: 0;">机构A</h2>
-            <ul style="list-style-type: none; padding: 0; font-size: 12px; margin: 5px 0;">
-                <li style="color: #555; margin: 5px 0;">🏆 <strong>专业导师团队</strong>：资深导师一对一指导。</li>
-                <li style="color: #555; margin: 5px 0;">🎨 <strong>个性化定制方案</strong>，突出个人风格。</li>
-            </ul>
-        </div>
-        <div style="background-color: #D4A5A5; padding: 10px; border-radius: 10px; margin-bottom: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-            <h2 style="color: #333; font-size: 16px; margin: 0;">机构B</h2>
-            <ul style="list-style-type: none; padding: 0; font-size: 12px; margin: 5px 0;">
-                <li style="color: #555; margin: 5px 0;">🌟 <strong>高成功率案例</strong>，数百人成功录取。</li>
-                <li style="color: #555; margin: 5px 0;">🏫 <strong>全球名校合作</strong>，优先录取机会。</li>
-            </ul>
-        </div>
-        <div style="background-color: #B5C2B7; padding: 10px; border-radius: 10px; margin-bottom: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-            <h2 style="color: #333; font-size: 16px; margin: 0;">机构C</h2>
-            <ul style="list-style-type: none; padding: 0; font-size: 12px; margin: 5px 0;">
-                <li style="color: #555; margin: 5px 0;">💼 <strong>一站式服务</strong>，全程无忧留学。</li>
-                <li style="color: #555; margin: 5px 0;">🔍 <strong>精准院校匹配</strong>，避免盲目选择。</li>
-            </ul>
-        </div>
-    </div>
-</div>
+    <h1>中国热门城市美国留学机构精选</h1>
+    <h2>值得信赖的留学申请伙伴</h2>
+    <p class="subtitle">经过严格筛选的优质机构 | 2023年最新推荐</p>
 
-</body>
-</html>
+    <table>
+        <thead>
+            <tr>
+                <th>城市</th>
+                <th>推荐数量</th>
+                <th>核心优势</th>
+                <th>特色亮点</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>北京</td>
+                <td>5家</td>
+                <td>顶尖名校资源丰富</td>
+                <td>前藤校招生官团队坐镇，常春藤录取率领先</td>
+            </tr>
+            <tr>
+                <td>上海</td>
+                <td>4家</td>
+                <td>申请策略精准</td>
+                <td>大数据分析选校，本科研究生双强项</td>
+            </tr>
+            <tr>
+                <td>广州</td>
+                <td>3家</td>
+                <td>服务细致全面</td>
+                <td>从申请到签证一站式服务，家长满意度高</td>
+            </tr>
+            <tr>
+                <td>深圳</td>
+                <td>4家</td>
+                <td>创新申请方案</td>
+                <td>擅长背景提升规划，科技类专业申请优势明显</td>
+            </tr>
+            <tr>
+                <td>南京</td>
+                <td>2家</td>
+                <td>高端申请专家</td>
+                <td>TOP20名校保录计划，文书质量行业标杆</td>
+            </tr>
+            <tr>
+                <td>杭州</td>
+                <td>3家</td>
+                <td>录取规则精通</td>
+                <td>多案例证明能帮助学生实现排名跃升</td>
+            </tr>
+            <tr>
+                <td>成都</td>
+                <td>2家</td>
+                <td>师资力量雄厚</td>
+                <td>海外名校毕业顾问占比80%以上</td>
+            </tr>
+            <tr>
+                <td>武汉</td>
+                <td>2家</td>
+                <td>性价比突出</td>
+                <td>中档收费提供高端服务，奖学金申请专业</td>
+            </tr>
+            <tr>
+                <td>西安</td>
+                <td>2家</td>
+                <td>签证服务卓越</td>
+                <td>面签培训系统完善，通过率接近100%</td>
+            </tr>
+            <tr>
+                <td>天津</td>
+                <td>1家</td>
+                <td>新兴实力机构</td>
+                <td>专注理工科申请，近年TOP30录取增长显著</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="note">
+        <p><span class="highlight">温馨提示：</span>以上推荐基于2023年最新行业调研和学生反馈，具体选择还需结合个人实际情况。建议先进行初步咨询，感受服务风格后再做决定。</p>
+    </div>
+
+    <div class="footer">
+        <p><strong>选择留学机构小贴士：</strong></p>
+        <ul>
+            <li>北京、上海机构适合冲刺顶尖名校的学生</li>
+            <li>二线城市机构往往性价比更高，服务更个性化</li>
+            <li>签约前建议通过校友网络了解机构真实口碑</li>
+            <li>早规划（建议提前1-2年）能获得更全面的背景提升指导</li>
+        </ul>
+    </div>
 </body>
 </html>

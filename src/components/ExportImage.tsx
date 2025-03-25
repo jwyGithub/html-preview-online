@@ -29,12 +29,21 @@ export function ExportImage({ targetRef, disabled }: ExportImageProps) {
             }
             const url = originalIframe.src;
 
-            // 创建临时 iframe 用于导出
+            // 获取原始iframe的尺寸
+            const originalRect = originalIframe.getBoundingClientRect();
+            const originalWidth = originalIframe.clientWidth || originalRect.width;
+            const originalHeight = originalIframe.clientHeight || originalRect.height;
+
+            // 创建临时 iframe 用于导出，保持与原始iframe相同的尺寸
             const tempIframe = document.createElement('iframe');
             tempIframe.style.position = 'absolute';
             tempIframe.style.top = '-9999px';
             tempIframe.style.left = '-9999px';
+            tempIframe.style.width = `${originalWidth}px`;
+            tempIframe.style.height = `${originalHeight}px`;
             tempIframe.style.border = 'none';
+            tempIframe.style.overflow = 'hidden';
+            tempIframe.sandbox = 'allow-same-origin allow-scripts';
             document.body.appendChild(tempIframe);
 
             try {
@@ -54,30 +63,55 @@ export function ExportImage({ targetRef, disabled }: ExportImageProps) {
                     throw new Error('无法访问预览内容');
                 }
 
-                // 使用 html2canvas 捕获内容
+                // 优化iframe内容以获得更好的导出结果
+                const styleElement = iframeDocument.createElement('style');
+                styleElement.textContent = `
+                    * { 
+                        -webkit-print-color-adjust: exact !important; 
+                        print-color-adjust: exact !important; 
+                    }
+                    body {
+                        margin: 0;
+                        padding: 0;
+                        overflow: visible !important;
+                        background-color: #ffffff;
+                    }
+                `;
+                iframeDocument.head.appendChild(styleElement);
+
+                // 使用 html2canvas 捕获内容，设置为原始尺寸
                 const canvas = await html2canvas(iframeDocument.body, {
                     allowTaint: true,
                     useCORS: true,
                     logging: false,
                     backgroundColor: '#ffffff',
-                    scale: window.devicePixelRatio || 1, // 使用设备像素比来保证清晰度
-                    onclone: (documentClone) => {
+                    scale: window.devicePixelRatio, // 使用原始比例，不放大
+                    scrollX: 0,
+                    scrollY: 0,
+                    width: originalWidth,
+                    height: originalHeight,
+                    onclone: documentClone => {
                         // 确保克隆的文档体现完整内容
                         const bodyClone = documentClone.querySelector('body');
                         if (bodyClone) {
                             bodyClone.style.overflow = 'visible';
                             bodyClone.style.margin = '0';
                             bodyClone.style.padding = '0';
-                            
+
                             // 确保所有内容都可见
                             const allElements = bodyClone.querySelectorAll('*');
                             allElements.forEach(el => {
                                 const element = el as HTMLElement;
-                                const computedStyle = window.getComputedStyle(element);
-                                
-                                // 处理可能导致内容截断的样式
-                                if (computedStyle.overflow === 'hidden') {
-                                    element.style.overflow = 'visible';
+                                if (element.style) {
+                                    // 处理可能导致内容截断的样式
+                                    if (element.style.overflow === 'hidden') {
+                                        element.style.overflow = 'visible';
+                                    }
+                                    // 确保图片显示完整
+                                    if (element.tagName.toLowerCase() === 'img') {
+                                        element.style.maxWidth = '100%';
+                                        element.setAttribute('crossorigin', 'anonymous');
+                                    }
                                 }
                             });
                         }
@@ -85,51 +119,25 @@ export function ExportImage({ targetRef, disabled }: ExportImageProps) {
                 });
 
                 // 转换为图片并下载
-                canvas.toBlob(blob => {
-                    if (!blob) {
-                        throw new Error('无法创建图片');
-                    }
-                    
-                    // 获取文件名 - 优先使用iframe的title
-                    let fileName = '';
-                    
-                    // 尝试获取iframe的title
-                    try {
-                        const iframeTitle = originalIframe.title || 
-                                          tempIframe.contentDocument?.title || 
-                                          tempIframe.contentWindow?.document.title;
-                        
-                        if (iframeTitle && iframeTitle.trim() !== '' && iframeTitle.toLowerCase() !== 'preview') {
-                            fileName = iframeTitle.trim();
+                canvas.toBlob(
+                    blob => {
+                        if (!blob) {
+                            throw new Error('无法创建图片');
                         }
-                    } catch (e) {
-                        console.warn('获取iframe标题失败:', e);
-                    }
-                    
-                    // 如果没有有效的title，使用时间格式
-                    if (!fileName) {
-                        const now = new Date();
-                        const year = now.getFullYear();
-                        const month = String(now.getMonth() + 1).padStart(2, '0');
-                        const day = String(now.getDate()).padStart(2, '0');
-                        const hours = String(now.getHours()).padStart(2, '0');
-                        const minutes = String(now.getMinutes()).padStart(2, '0');
-                        const seconds = String(now.getSeconds()).padStart(2, '0');
-                        
-                        fileName = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-                    }
-                    
-                    // 处理文件名中的特殊字符，确保文件名有效
-                    fileName = fileName.replace(/[\\/:*?"<>|]/g, '-');
-                    
-                    const url = URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = `${fileName}.png`;
-                    a.click();
-                    URL.revokeObjectURL(url);
-                    toast.success('导出成功');
-                }, 'image/png');
+
+                        const fileName = new Date().getTime().toString();
+
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `${fileName}.png`;
+                        a.click();
+                        URL.revokeObjectURL(url);
+                        toast.success('导出成功');
+                    },
+                    'image/png',
+                    0.95
+                ); // 保持较高图像质量
             } finally {
                 // 清理临时 iframe
                 document.body.removeChild(tempIframe);
@@ -143,12 +151,7 @@ export function ExportImage({ targetRef, disabled }: ExportImageProps) {
     };
 
     return (
-        <Button 
-            variant='default' 
-            onClick={handleExport} 
-            disabled={disabled || isExporting} 
-            className='w-full'
-        >
+        <Button variant='default' onClick={handleExport} disabled={disabled || isExporting} className='w-full'>
             <Download className={`h-4 w-4 mr-2 ${isExporting ? 'animate-pulse' : ''}`} />
             {isExporting ? '导出中...' : '导出图片'}
         </Button>
