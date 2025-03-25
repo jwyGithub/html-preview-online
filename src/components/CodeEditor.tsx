@@ -15,10 +15,10 @@ interface CodeEditorProps {
 export function CodeEditor({ value, onChange, onGenerate, isLoading }: CodeEditorProps) {
     return (
         <Card className='flex flex-col h-full'>
-            <CardHeader>
+            <CardHeader className='py-2 px-4'>
                 <CardTitle>HTML 代码</CardTitle>
             </CardHeader>
-            <CardContent className='flex-1 min-h-0'>
+            <CardContent className='flex-1 min-h-0 p-4'>
                 <Textarea
                     value={value}
                     onChange={(e: ChangeEvent<HTMLTextAreaElement>) => onChange(e.target.value)}
@@ -26,7 +26,7 @@ export function CodeEditor({ value, onChange, onGenerate, isLoading }: CodeEdito
                     placeholder='在此输入 HTML 代码...'
                 />
             </CardContent>
-            <CardFooter>
+            <CardFooter className='py-2 px-4'>
                 <Button onClick={onGenerate} disabled={isLoading} className='w-full'>
                     {isLoading ? '生成预览中...' : '生成预览'}
                 </Button>

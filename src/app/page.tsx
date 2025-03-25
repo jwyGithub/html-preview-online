@@ -4,9 +4,7 @@ import { useEffect } from 'react';
 import { Layout } from '@/components/Layout';
 import { CodeEditor } from '@/components/CodeEditor';
 import { PreviewArea } from '@/components/PreviewArea';
-import { PreviewModal } from '@/components/PreviewModal';
 import { useHtmlPreview } from '@/hooks/useHtmlPreview';
-import { useModal } from '@/hooks/useModal';
 
 export default function Home() {
   const { 
@@ -17,8 +15,6 @@ export default function Home() {
     error, 
     generatePreview 
   } = useHtmlPreview();
-  
-  const { isOpen, open, close } = useModal();
   
   // 解决iOS Safari上的回弹问题
   useEffect(() => {
@@ -43,7 +39,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <div className='flex flex-col lg:flex-row gap-6 h-[calc(100vh-180px)] overflow-hidden'>
+      <div className='flex flex-col lg:flex-row gap-3 h-[calc(100vh-136px)] overflow-hidden'>
         {/* 左侧输入区域 */}
         <div className='w-full lg:w-1/2 flex flex-col overflow-hidden'>
           <CodeEditor 
@@ -56,19 +52,9 @@ export default function Home() {
 
         {/* 右侧预览区域 */}
         <div className='w-full lg:w-1/2 flex flex-col overflow-hidden'>
-          <PreviewArea 
-            previewUrl={previewUrl} 
-            onExpand={open} 
-          />
+          <PreviewArea previewUrl={previewUrl} />
         </div>
       </div>
-
-      {/* 预览弹窗 */}
-      <PreviewModal 
-        isOpen={isOpen} 
-        onClose={close} 
-        previewUrl={previewUrl} 
-      />
     </Layout>
   );
 }
