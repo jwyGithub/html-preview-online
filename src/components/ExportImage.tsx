@@ -89,11 +89,43 @@ export function ExportImage({ targetRef, disabled }: ExportImageProps) {
                     if (!blob) {
                         throw new Error('无法创建图片');
                     }
+                    
+                    // 获取文件名 - 优先使用iframe的title
+                    let fileName = '';
+                    
+                    // 尝试获取iframe的title
+                    try {
+                        const iframeTitle = originalIframe.title || 
+                                          tempIframe.contentDocument?.title || 
+                                          tempIframe.contentWindow?.document.title;
+                        
+                        if (iframeTitle && iframeTitle.trim() !== '' && iframeTitle.toLowerCase() !== 'preview') {
+                            fileName = iframeTitle.trim();
+                        }
+                    } catch (e) {
+                        console.warn('获取iframe标题失败:', e);
+                    }
+                    
+                    // 如果没有有效的title，使用时间格式
+                    if (!fileName) {
+                        const now = new Date();
+                        const year = now.getFullYear();
+                        const month = String(now.getMonth() + 1).padStart(2, '0');
+                        const day = String(now.getDate()).padStart(2, '0');
+                        const hours = String(now.getHours()).padStart(2, '0');
+                        const minutes = String(now.getMinutes()).padStart(2, '0');
+                        const seconds = String(now.getSeconds()).padStart(2, '0');
+                        
+                        fileName = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+                    }
+                    
+                    // 处理文件名中的特殊字符，确保文件名有效
+                    fileName = fileName.replace(/[\\/:*?"<>|]/g, '-');
+                    
                     const url = URL.createObjectURL(blob);
                     const a = document.createElement('a');
                     a.href = url;
-                    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-                    a.download = `html-preview-${timestamp}.png`;
+                    a.download = `${fileName}.png`;
                     a.click();
                     URL.revokeObjectURL(url);
                     toast.success('导出成功');
