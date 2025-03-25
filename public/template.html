@@ -5,12 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HTML Preview</title>
     <style>
-        /* 确保内容完全显示 */
-        html, body {
+        /* 简化样式，专注于内容展示 */
+        body {
             margin: 0;
             padding: 0;
-            width: 100%;
-            height: 100%;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        /* 确保图片等内容不溢出 */
+        img, video, canvas, svg {
+            max-width: 100%;
+            height: auto;
         }
     </style>
 </head>
@@ -32,36 +36,34 @@
     </style>
 </head>
 <body>
-    <div style="background-color: #F8F9FA; padding: 20px; border-radius: 10px; font-family: Arial, sans-serif;">
-    <h1 style="color: #333; text-align: center;">艺术生留学作品集机构对比</h1>
-    <div style="margin-top: 20px; text-align: center;">
-        <div style="background-color: #E9EDC9; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-            <h2 style="color: #333;">机构A</h2>
-            <ul style="list-style-type: none; padding: 0;">
-                <li style="color: #555; margin: 10px 0;">🏆 <strong>专业导师团队</strong>：机构A拥有来自顶级艺术院校的资深导师，提供一对一指导，确保作品集质量。</li>
-                <li style="color: #555; margin: 10px 0;">🎨 <strong>个性化定制服务</strong>：根据学生背景和目标院校，量身定制作品集方案，突出个人风格。</li>
-                <li style="color: #555; margin: 10px 0;">📚 <strong>丰富的资源库</strong>：提供海量艺术资源，包括素材、案例和行业动态，帮助学生拓宽视野。</li>
+    <div style="background-color: #F8F9FA; padding: 20px; border-radius: 10px; font-family: Arial, sans-serif; width: 300px; height: 400px; display: flex; flex-direction: column; justify-content: space-between;">
+    <h1 style="color: #333; text-align: center; font-size: 18px; margin: 0;">艺术生留学作品集机构对比</h1>
+    <div style="text-align: center;">
+        <div style="background-color: #E9EDC9; padding: 10px; border-radius: 10px; margin-bottom: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+            <h2 style="color: #333; font-size: 16px; margin: 0;">机构A</h2>
+            <ul style="list-style-type: none; padding: 0; font-size: 12px; margin: 5px 0;">
+                <li style="color: #555; margin: 5px 0;">🏆 <strong>专业导师团队</strong>：资深导师一对一指导。</li>
+                <li style="color: #555; margin: 5px 0;">🎨 <strong>个性化定制方案</strong>，突出个人风格。</li>
             </ul>
         </div>
-        <div style="background-color: #D4A5A5; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-            <h2 style="color: #333;">机构B</h2>
-            <ul style="list-style-type: none; padding: 0;">
-                <li style="color: #555; margin: 10px 0;">🌟 <strong>高成功率案例</strong>：机构B每年帮助数百名学生成功申请顶级艺术院校，案例丰富，口碑极佳。</li>
-                <li style="color: #555; margin: 10px 0;">🏫 <strong>全球名校合作</strong>：与全球多所顶尖艺术院校保持紧密合作，为学生提供优先录取机会。</li>
-                <li style="color: #555; margin: 10px 0;">📈 <strong>数据驱动的分析</strong>：通过数据分析评估学生潜力，精准制定申请策略，提升录取几率。</li>
+        <div style="background-color: #D4A5A5; padding: 10px; border-radius: 10px; margin-bottom: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+            <h2 style="color: #333; font-size: 16px; margin: 0;">机构B</h2>
+            <ul style="list-style-type: none; padding: 0; font-size: 12px; margin: 5px 0;">
+                <li style="color: #555; margin: 5px 0;">🌟 <strong>高成功率案例</strong>，数百人成功录取。</li>
+                <li style="color: #555; margin: 5px 0;">🏫 <strong>全球名校合作</strong>，优先录取机会。</li>
             </ul>
         </div>
-        <div style="background-color: #B5C2B7; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-            <h2 style="color: #333;">机构C</h2>
-            <ul style="list-style-type: none; padding: 0;">
-                <li style="color: #555; margin: 10px 0;">💼 <strong>一站式留学服务</strong>：从作品集制作到签证申请，机构C提供全程无忧服务，省心省力。</li>
-                <li style="color: #555; margin: 10px 0;">🔍 <strong>精准的院校匹配</strong>：根据学生兴趣和实力，精准推荐适合的院校和专业，避免盲目选择。</li>
-                <li style="color: #555; margin: 10px 0;">📅 <strong>灵活的课程安排</strong>：提供线上线下多种课程形式，时间灵活，满足不同学生的需求。</li>
+        <div style="background-color: #B5C2B7; padding: 10px; border-radius: 10px; margin-bottom: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+            <h2 style="color: #333; font-size: 16px; margin: 0;">机构C</h2>
+            <ul style="list-style-type: none; padding: 0; font-size: 12px; margin: 5px 0;">
+                <li style="color: #555; margin: 5px 0;">💼 <strong>一站式服务</strong>，全程无忧留学。</li>
+                <li style="color: #555; margin: 5px 0;">🔍 <strong>精准院校匹配</strong>，避免盲目选择。</li>
             </ul>
         </div>
     </div>
 </div>
 
 </body>
+</html>
 </body>
 </html>

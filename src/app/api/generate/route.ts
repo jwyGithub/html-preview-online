@@ -31,12 +31,16 @@ export async function POST(request: Request) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HTML Preview</title>
     <style>
-        /* 确保内容完全显示 */
-        html, body {
+        /* 简化样式，专注于内容展示 */
+        body {
             margin: 0;
             padding: 0;
-            width: 100%;
-            height: 100%;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        /* 确保图片等内容不溢出 */
+        img, video, canvas, svg {
+            max-width: 100%;
+            height: auto;
         }
     </style>
 </head>
